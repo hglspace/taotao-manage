@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.taotao.manage.mapper.ItemDescMapper">
+     <insert id="sava">
+       INSERT INTO tb_item_desc (
+		    item_id,
+			item_desc,
+			created,
+			updated
+		)
+		VALUES
+			(
+				#{itemId},
+				#{itemDesc},
+				now(),
+				now()
+			);
+     </insert>
+     
+     <select id="queryDescById" resultType="ItemDesc">
+       select * from tb_item_desc where item_id=#{itemId}
+     </select>
+     
+     
+     <update id="update">
+        UPDATE tb_item_desc
+         <set>
+        <if test="itemDesc!=null">
+          item_desc=#{itemDesc},
+        </if>
+        <if test="updated!=null">
+          updated=#{updated},
+        </if>
+      </set>
+      where item_id=#{itemId}
+     </update>
+  </mapper>

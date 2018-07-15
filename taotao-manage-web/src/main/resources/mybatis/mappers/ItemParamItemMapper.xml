@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.taotao.manage.mapper.ItemParamItemMapper">
+      <insert id="save">
+         insert into tb_item_param_item(
+            id,
+            item_id,
+            param_data,
+            created,
+            updated
+         )
+         values(
+         null,
+         #{itemId},
+         #{paramData},
+         now(),
+         now()
+         )
+      </insert>
+      <select id="queryByItemId" resultType="ItemParamItem">
+        select * from tb_item_param_item where item_id=#{itemId}
+      </select>
+      
+      <update id="update">
+         UPDATE tb_item_param_item
+         <set>
+        <if test="paramData!=null">
+          param_data=#{paramData},
+        </if>
+        <if test="1==1">
+          updated=now(),
+        </if>
+      </set>
+       where item_id=#{itemId}
+      </update>
+  </mapper>
